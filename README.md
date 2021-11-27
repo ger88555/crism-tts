@@ -24,3 +24,24 @@ Un entorno virtual permite utilizar las versiones de las librerías y de Python 
 ### 3. Arrancar el servidor.
 
 - ```flask run```
+
+## Estructura del proyecto
+
+    .
+    └── app/                        # Archivos del proyecto
+        └── exceptions/             # Excepciones personalizadas
+            ├── UnreadableWebsiteError.py
+            └── WebsiteNotFoundError.py
+        └── parsers/                # Analizadores sintácticos
+            ├── AbstractParser.py   # Analizador sintáctico abstracto (clase base para los analizadores)
+            ├── HTMLParser.py       # Analizador de HTML a texto en prosa
+            └── TTSParser.py        # Analizador de texto a voz
+        └── static/                 # Archivos estáticos para servir en la aplicación de Flask
+            └── home.js
+        ├── storage/                # Depósito para los archivos de voz generados
+        └── templates/              # Plantillas de Flask (con sintaxis de Jinja2 sobre HTML)
+            └── home.html           # Vista única del prototipo
+        ├── __init__.py             # Inicialización de la aplicación de Flask
+        └── views.py                # Declaración de vistas de Flask
+    ├── README.md
+    └── setup.py                    # Script de instalación del proyecto
