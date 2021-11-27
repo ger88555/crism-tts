@@ -1,8 +1,8 @@
 import os
 
 from flask import Flask
-from flask.helpers import make_response
-from flask.json import jsonify
+from flask.helpers import flash
+from flask.templating import render_template
 from werkzeug.exceptions import HTTPException
 
 from app.exceptions.UnreadableWebsiteError import UnreadableWebsiteError
@@ -30,11 +30,13 @@ def create_app(test_config=None):
     # register views
     app.register_blueprint(views.bp)
     
-    # provide JSON responses for custom exceptions
+    # flash error messages from custom exceptions
     @app.errorhandler(HTTPException)
     def handle_error(e):
         if e is UnreadableWebsiteError or e is WebsiteNotFoundError:
-            return make_response(jsonify(e.description), e.code)
+            flash(e.description)
+
+            return render_template("home.html")
 
         return e
 

@@ -1,3 +1,4 @@
+from io import TextIOWrapper
 from typing import Any
 from abc import ABC, abstractmethod
 
@@ -24,8 +25,6 @@ class AbstractParser(ABC):
         """Get the parsed data."""
         pass
 
-    def save(self, file: str):
+    def save(self, file: TextIOWrapper):
         """Parse the data into a file."""
-        
-        with open(file, 'w') as out:
-            out.write(self.extract())
+        file.write(self.extract())
