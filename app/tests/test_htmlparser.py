@@ -19,17 +19,38 @@ ALL_WEBSITES = pytest.mark.datafiles(
 # Declare tests
 HTML_REGEX = r"<\/?[\w\s]*>|<.+[\W]>"
 
-@ALL_WEBSITES
-def test_extract_prose(datafiles):
-    for file in datafiles.listdir():
+class TestHTMLParser:
 
-        # arrange
-        html = Path(file).read_text('UTF-8')
+    @ALL_WEBSITES
+    def test_extract(self, datafiles):
+        for file in datafiles.listdir():
 
-        # act
-        text = HTMLParser(html).extract()
+            # arrange
+            html = Path(file).read_text('UTF-8')
 
-        # assert
-        assert isinstance(text, str)
+            # act
+            text = HTMLParser(html).extract()
 
-        assert re.search(HTML_REGEX, text) is None
+            # assert
+            assert isinstance(text, str)
+
+            assert re.search(HTML_REGEX, text) is None
+
+    @ALL_WEBSITES
+    def test_save(self, datafiles, tmpdir):
+        for file in datafiles.listdir():
+
+            # arrange
+            html = Path(file).read_text('UTF-8')
+            parser = HTMLParser(html)
+            output = parser.extract()
+            dest = os.path.join(tmpdir, os.path.basename(file))
+
+            # act
+            with open(dest, 'w', encoding='UTF-8') as buffer:
+                parser.save(buffer)
+
+            # assert
+            assert os.path.exists(dest)
+
+            assert open(dest, 'r', encoding='UTF-8').read() == output
