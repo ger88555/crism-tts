@@ -20,7 +20,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    ###### a real life use
     - name: Set up Python 3.9
       uses: actions/setup-python@v2.3.0
       with:
@@ -44,15 +43,3 @@ jobs:
         flags: pytests
         file: ./app/tests/coverage.xml
         fail_ci_if_error: true
-        
-    ###### use suggested by codecov
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: codecov/codecov-action@v2
-#       with:
-#         token: ${{ secrets.CODECOV_TOKEN }}
-#         files: ./coverage1.xml,./coverage2.xml # optional
-#         flags: unittests # optional
-#         name: codecov-umbrella # optional
-#         fail_ci_if_error: true # optional (default = false)
-#         verbose: true # optional (default = false)
