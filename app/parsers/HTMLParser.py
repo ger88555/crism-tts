@@ -1,4 +1,5 @@
 from app.parsers.AbstractParser import AbstractParser
+from bs4 import BeautifulSoup
 
 class HTMLParser(AbstractParser):
     """
@@ -6,4 +7,6 @@ class HTMLParser(AbstractParser):
     """
 
     def extract(self) -> str:
-        return NotImplementedError
+        soup = BeautifulSoup(self.data, 'html.parser')
+
+        return soup.get_text()
