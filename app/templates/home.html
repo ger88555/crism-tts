@@ -104,12 +104,12 @@
                             <div class="row justify-content-center">
                                 <div class="col-auto">
                                     <audio class="ratio" controls>
-                                        <source id="result_audio" type="audio/mp3" src="{{ url_for('download', name=speech ) }}">
+                                        <source id="result_audio" type="audio/mp3" src="{{ url_for('views.download', name=speech ) }}">
                                         Tu navegador no soporta audio embebido.
                                     </audio>
                                 </div>
                                 <div class="col-auto">
-                                    <a id="download" class="btn btn-outline-secondary" title="Descargar resultado" download="{{ url_for('download', name=speech ) }}" target="_blank">
+                                    <a id="download" class="btn btn-outline-secondary" title="Descargar resultado" download="{{ url_for('views.download', name=speech ) }}" target="_blank">
                                         <i class="bi-download"></i>
                                     </a>
                                 </div>
