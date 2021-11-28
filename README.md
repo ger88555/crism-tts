@@ -1,3 +1,8 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ger88555/crism-tts/CI)
+[![codecov](https://codecov.io/gh/ger88555/crism-tts/branch/master/graph/badge.svg?token=O8QS2P0CGE)](https://codecov.io/gh/ger88555/crism-tts)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ger88555/crism-tts)
+![Python 3.9](https://img.shields.io/badge/python-%5E3.9-blue)
+
 # CRIS-TTS \[Prototipo\]
 
 Lector de TTS para documentos web.
