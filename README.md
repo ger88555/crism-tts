@@ -39,9 +39,26 @@ Un entorno virtual permite utilizar las versiones de las librerías y de Python 
         └── static/                 # Archivos estáticos para servir en la aplicación de Flask
             └── home.js
         ├── storage/                # Depósito para los archivos de voz generados
+        ├── tests/                  # Pruebas automatizadas del proyecto
+            └── data/               # Datos de prueba
         └── templates/              # Plantillas de Flask (con sintaxis de Jinja2 sobre HTML)
             └── home.html           # Vista única del prototipo
         ├── __init__.py             # Inicialización de la aplicación de Flask
         └── views.py                # Declaración de vistas de Flask
     ├── README.md
     └── setup.py                    # Script de instalación del proyecto
+
+## Testing
+
+Este proyecto utiliza [`pytest`](https://docs.pytest.org/en/6.2.x/) y [`tox`](https://tox.wiki/en/stable/example/pytest.html) para pruebas automatizadas. `pytest` es la librería de pruebas automatizadas mientras que `tox` permite utilizar un entorno virtual exclusivo para las pruebas e informar a servicios de integración continua.
+
+Es posible utilizar cualquiera de las dos opciones para ejecutar las pruebas. Sin embargo, `pytest` es suficiente para los desarrolladores. Las instrucciones son las siguientes:
+
+### 1 Instalar dependencias
+
+- ```pip install pytest pytest-datafiles```
+
+### 2 Correr pruebas
+
+- ```pytest```
+
