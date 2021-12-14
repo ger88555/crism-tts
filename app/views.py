@@ -1,10 +1,11 @@
 import os
+from sys import path
 import requests
 import tempfile
 
 from flask import Blueprint, request
 from flask.templating import render_template
-from werkzeug.utils import send_file
+from werkzeug.utils import send_from_directory
 from app.exceptions.UnreadableWebsiteError import UnreadableWebsiteError
 from app.exceptions.WebsiteNotFoundError import WebsiteNotFoundError
 from app.parsers.HTMLParser import HTMLParser
@@ -49,12 +50,11 @@ def to_file(text) -> str:
     """
     Generate speech and retrieve the file name.
     """
-    with tempfile.NamedTemporaryFile(dir=CONVERSIONS_DIRECTORY, delete=False) as temp:
+    with tempfile.NamedTemporaryFile(dir=CONVERSIONS_DIRECTORY, delete=False, suffix='.mp3', mode='wb') as temp:
         TTSParser(text).save(temp)
 
-        return temp.name
+        return os.path.basename(temp.name)
 
 @bp.route("/download/<name>", methods=['GET', 'POST'])
 def download(name):
-    with open(os.path.join(CONVERSIONS_DIRECTORY, name)) as file:
-        return send_file(file, as_attachment=request.method == 'POST', download_name="voz.mp3")
+    return send_from_directory(CONVERSIONS_DIRECTORY, path=name, environ=request.environ, as_attachment=request.method == 'POST', download_name="voz.mp3")
