@@ -11,4 +11,4 @@ class TTSParser(AbstractParser):
         tts = gTTS(self.data, lang='es', tld = 'es')
         tts.write_to_fp(mp3_fp)
 
-        return mp3_fp
+        return mp3_fp.read()
